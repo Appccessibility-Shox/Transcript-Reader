@@ -1,0 +1,7 @@
+html.tr-enabled body *:not(transcript-reader) {
+  visibility:hidden !important;
+  display: none !important;
+}
+html.tr-enabled {
+  overflow: hidden !important;
+}

@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "Transcript Reader",
+        "description": "The display name for the extension."
+    },
+    "extension_description": {
+        "message": "Transcript Reader lets users view video capions and transcripts comfortably.",
+        "description": "Description of what the extension does."
+    }
+}

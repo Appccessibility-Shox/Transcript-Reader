@@ -1,0 +1,972 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E8293F22701E42400BB6B41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8293F12701E42400BB6B41 /* AppDelegate.swift */; };
+		6E8293F42701E42400BB6B41 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8293F32701E42400BB6B41 /* SceneDelegate.swift */; };
+		6E8293F72701E42400BB6B41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293F52701E42400BB6B41 /* LaunchScreen.storyboard */; };
+		6E8293FA2701E42400BB6B41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293F82701E42400BB6B41 /* Main.storyboard */; };
+		6E8294032701E42400BB6B41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8294022701E42400BB6B41 /* AppDelegate.swift */; };
+		6E8294062701E42400BB6B41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8294042701E42400BB6B41 /* Main.storyboard */; };
+		6E82940D2701E42400BB6B41 /* Transcript Reader Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6E82940C2701E42400BB6B41 /* Transcript Reader Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6E8294172701E42400BB6B41 /* Transcript Reader Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6E8294162701E42400BB6B41 /* Transcript Reader Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6E82941D2701E42400BB6B41 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293D82701E41E00BB6B41 /* Main.html */; };
+		6E82941E2701E42400BB6B41 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293D82701E41E00BB6B41 /* Main.html */; };
+		6E82941F2701E42400BB6B41 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DA2701E41E00BB6B41 /* Icon.png */; };
+		6E8294202701E42400BB6B41 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DA2701E41E00BB6B41 /* Icon.png */; };
+		6E8294212701E42400BB6B41 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DB2701E41E00BB6B41 /* Style.css */; };
+		6E8294222701E42400BB6B41 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DB2701E41E00BB6B41 /* Style.css */; };
+		6E8294232701E42400BB6B41 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DC2701E41E00BB6B41 /* Script.js */; };
+		6E8294242701E42400BB6B41 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DC2701E41E00BB6B41 /* Script.js */; };
+		6E8294252701E42400BB6B41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8293DD2701E41E00BB6B41 /* ViewController.swift */; };
+		6E8294262701E42400BB6B41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8293DD2701E41E00BB6B41 /* ViewController.swift */; };
+		6E8294272701E42400BB6B41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DE2701E42400BB6B41 /* Assets.xcassets */; };
+		6E8294282701E42400BB6B41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293DE2701E42400BB6B41 /* Assets.xcassets */; };
+		6E8294292701E42400BB6B41 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8293E02701E42400BB6B41 /* SafariWebExtensionHandler.swift */; };
+		6E82942A2701E42400BB6B41 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8293E02701E42400BB6B41 /* SafariWebExtensionHandler.swift */; };
+		6E82942B2701E42400BB6B41 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E22701E42400BB6B41 /* _locales */; };
+		6E82942C2701E42400BB6B41 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E22701E42400BB6B41 /* _locales */; };
+		6E82942D2701E42400BB6B41 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E32701E42400BB6B41 /* images */; };
+		6E82942E2701E42400BB6B41 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E32701E42400BB6B41 /* images */; };
+		6E82942F2701E42400BB6B41 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E42701E42400BB6B41 /* manifest.json */; };
+		6E8294302701E42400BB6B41 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E42701E42400BB6B41 /* manifest.json */; };
+		6E8294312701E42400BB6B41 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E52701E42400BB6B41 /* background.js */; };
+		6E8294322701E42400BB6B41 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 6E8293E52701E42400BB6B41 /* background.js */; };
+		6E82944F2701E56800BB6B41 /* helper.js in Resources */ = {isa = PBXBuildFile; fileRef = 6E82944C2701E56700BB6B41 /* helper.js */; };
+		6E8294502701E56800BB6B41 /* helper.js in Resources */ = {isa = PBXBuildFile; fileRef = 6E82944C2701E56700BB6B41 /* helper.js */; };
+		6EE02DC72705AAB100138D59 /* options.js in Resources */ = {isa = PBXBuildFile; fileRef = 6EE02DC62705AAB100138D59 /* options.js */; };
+		6EE02DC82705AAB100138D59 /* options.js in Resources */ = {isa = PBXBuildFile; fileRef = 6EE02DC62705AAB100138D59 /* options.js */; };
+		CB4FE1CD272A1A3800C2A448 /* foreground in Resources */ = {isa = PBXBuildFile; fileRef = CB4FE1CC272A1A3800C2A448 /* foreground */; };
+		CB4FE1CE272A1A3800C2A448 /* foreground in Resources */ = {isa = PBXBuildFile; fileRef = CB4FE1CC272A1A3800C2A448 /* foreground */; };
+		CB4FE1D0272A1A4000C2A448 /* frames in Resources */ = {isa = PBXBuildFile; fileRef = CB4FE1CF272A1A4000C2A448 /* frames */; };
+		CB4FE1D1272A1A4000C2A448 /* frames in Resources */ = {isa = PBXBuildFile; fileRef = CB4FE1CF272A1A4000C2A448 /* frames */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E82940E2701E42400BB6B41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E8293D22701E41E00BB6B41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E82940B2701E42400BB6B41;
+			remoteInfo = "Transcript Reader Extension (iOS)";
+		};
+		6E8294182701E42400BB6B41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E8293D22701E41E00BB6B41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E8294152701E42400BB6B41;
+			remoteInfo = "Transcript Reader Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6E8294402701E42400BB6B41 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6E82940D2701E42400BB6B41 /* Transcript Reader Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8294472701E42400BB6B41 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6E8294172701E42400BB6B41 /* Transcript Reader Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6E8293D92701E41E00BB6B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		6E8293DA2701E41E00BB6B41 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		6E8293DB2701E41E00BB6B41 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		6E8293DC2701E41E00BB6B41 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		6E8293DD2701E41E00BB6B41 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6E8293DE2701E42400BB6B41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E8293E02701E42400BB6B41 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		6E8293E22701E42400BB6B41 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		6E8293E32701E42400BB6B41 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		6E8293E42701E42400BB6B41 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		6E8293E52701E42400BB6B41 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		6E8293EE2701E42400BB6B41 /* Transcript Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Transcript Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E8293F12701E42400BB6B41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6E8293F32701E42400BB6B41 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6E8293F62701E42400BB6B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6E8293F92701E42400BB6B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E8293FB2701E42400BB6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E8294002701E42400BB6B41 /* Transcript Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Transcript Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E8294022701E42400BB6B41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6E8294052701E42400BB6B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E8294072701E42400BB6B41 /* Transcript Reader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Transcript Reader.entitlements"; sourceTree = "<group>"; };
+		6E82940C2701E42400BB6B41 /* Transcript Reader Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Transcript Reader Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E8294112701E42400BB6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E8294162701E42400BB6B41 /* Transcript Reader Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Transcript Reader Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E82941B2701E42400BB6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E82941C2701E42400BB6B41 /* Transcript Reader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Transcript Reader.entitlements"; sourceTree = "<group>"; };
+		6E82944C2701E56700BB6B41 /* helper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = helper.js; sourceTree = "<group>"; };
+		6EE02DC62705AAB100138D59 /* options.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = options.js; sourceTree = "<group>"; };
+		CB4FE1CC272A1A3800C2A448 /* foreground */ = {isa = PBXFileReference; lastKnownFileType = folder; path = foreground; sourceTree = "<group>"; };
+		CB4FE1CF272A1A4000C2A448 /* frames */ = {isa = PBXFileReference; lastKnownFileType = folder; path = frames; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E8293EB2701E42400BB6B41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8293FD2701E42400BB6B41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8294092701E42400BB6B41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8294132701E42400BB6B41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E8293D12701E41E00BB6B41 = {
+			isa = PBXGroup;
+			children = (
+				6E8293D62701E41E00BB6B41 /* Shared (App) */,
+				6E8293DF2701E42400BB6B41 /* Shared (Extension) */,
+				6E8293F02701E42400BB6B41 /* iOS (App) */,
+				6E8294012701E42400BB6B41 /* macOS (App) */,
+				6E8294102701E42400BB6B41 /* iOS (Extension) */,
+				6E82941A2701E42400BB6B41 /* macOS (Extension) */,
+				6E8293EF2701E42400BB6B41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E8293D62701E41E00BB6B41 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				6E8293DD2701E41E00BB6B41 /* ViewController.swift */,
+				6E8293DE2701E42400BB6B41 /* Assets.xcassets */,
+				6E8293D72701E41E00BB6B41 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		6E8293D72701E41E00BB6B41 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6E8293D82701E41E00BB6B41 /* Main.html */,
+				6E8293DA2701E41E00BB6B41 /* Icon.png */,
+				6E8293DB2701E41E00BB6B41 /* Style.css */,
+				6E8293DC2701E41E00BB6B41 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6E8293DF2701E42400BB6B41 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				6E8293E02701E42400BB6B41 /* SafariWebExtensionHandler.swift */,
+				6E8293E12701E42400BB6B41 /* Resources */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		6E8293E12701E42400BB6B41 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6E8293E22701E42400BB6B41 /* _locales */,
+				6E8293E32701E42400BB6B41 /* images */,
+				6E8293E42701E42400BB6B41 /* manifest.json */,
+				6E8293E52701E42400BB6B41 /* background.js */,
+				6EE02DC62705AAB100138D59 /* options.js */,
+				6E82944C2701E56700BB6B41 /* helper.js */,
+				CB4FE1CC272A1A3800C2A448 /* foreground */,
+				CB4FE1CF272A1A4000C2A448 /* frames */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6E8293EF2701E42400BB6B41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E8293EE2701E42400BB6B41 /* Transcript Reader.app */,
+				6E8294002701E42400BB6B41 /* Transcript Reader.app */,
+				6E82940C2701E42400BB6B41 /* Transcript Reader Extension.appex */,
+				6E8294162701E42400BB6B41 /* Transcript Reader Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E8293F02701E42400BB6B41 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				6E8293F12701E42400BB6B41 /* AppDelegate.swift */,
+				6E8293F32701E42400BB6B41 /* SceneDelegate.swift */,
+				6E8293F52701E42400BB6B41 /* LaunchScreen.storyboard */,
+				6E8293F82701E42400BB6B41 /* Main.storyboard */,
+				6E8293FB2701E42400BB6B41 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		6E8294012701E42400BB6B41 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				6E8294022701E42400BB6B41 /* AppDelegate.swift */,
+				6E8294042701E42400BB6B41 /* Main.storyboard */,
+				6E8294072701E42400BB6B41 /* Transcript Reader.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		6E8294102701E42400BB6B41 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				6E8294112701E42400BB6B41 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		6E82941A2701E42400BB6B41 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				6E82941B2701E42400BB6B41 /* Info.plist */,
+				6E82941C2701E42400BB6B41 /* Transcript Reader.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E8293ED2701E42400BB6B41 /* Transcript Reader (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E8294412701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader (iOS)" */;
+			buildPhases = (
+				6E8293EA2701E42400BB6B41 /* Sources */,
+				6E8293EB2701E42400BB6B41 /* Frameworks */,
+				6E8293EC2701E42400BB6B41 /* Resources */,
+				6E8294402701E42400BB6B41 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E82940F2701E42400BB6B41 /* PBXTargetDependency */,
+			);
+			name = "Transcript Reader (iOS)";
+			productName = "Transcript Reader (iOS)";
+			productReference = 6E8293EE2701E42400BB6B41 /* Transcript Reader.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E8293FF2701E42400BB6B41 /* Transcript Reader (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E8294482701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader (macOS)" */;
+			buildPhases = (
+				6E8293FC2701E42400BB6B41 /* Sources */,
+				6E8293FD2701E42400BB6B41 /* Frameworks */,
+				6E8293FE2701E42400BB6B41 /* Resources */,
+				6E8294472701E42400BB6B41 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E8294192701E42400BB6B41 /* PBXTargetDependency */,
+			);
+			name = "Transcript Reader (macOS)";
+			productName = "Transcript Reader (macOS)";
+			productReference = 6E8294002701E42400BB6B41 /* Transcript Reader.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E82940B2701E42400BB6B41 /* Transcript Reader Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E82943D2701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader Extension (iOS)" */;
+			buildPhases = (
+				6E8294082701E42400BB6B41 /* Sources */,
+				6E8294092701E42400BB6B41 /* Frameworks */,
+				6E82940A2701E42400BB6B41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Transcript Reader Extension (iOS)";
+			productName = "Transcript Reader Extension (iOS)";
+			productReference = 6E82940C2701E42400BB6B41 /* Transcript Reader Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		6E8294152701E42400BB6B41 /* Transcript Reader Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E8294442701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader Extension (macOS)" */;
+			buildPhases = (
+				6E8294122701E42400BB6B41 /* Sources */,
+				6E8294132701E42400BB6B41 /* Frameworks */,
+				6E8294142701E42400BB6B41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Transcript Reader Extension (macOS)";
+			productName = "Transcript Reader Extension (macOS)";
+			productReference = 6E8294162701E42400BB6B41 /* Transcript Reader Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E8293D22701E41E00BB6B41 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					6E8293ED2701E42400BB6B41 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					6E8293FF2701E42400BB6B41 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					6E82940B2701E42400BB6B41 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					6E8294152701E42400BB6B41 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+				};
+			};
+			buildConfigurationList = 6E8293D52701E41E00BB6B41 /* Build configuration list for PBXProject "Transcript Reader" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6E8293D12701E41E00BB6B41;
+			productRefGroup = 6E8293EF2701E42400BB6B41 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E8293ED2701E42400BB6B41 /* Transcript Reader (iOS) */,
+				6E8293FF2701E42400BB6B41 /* Transcript Reader (macOS) */,
+				6E82940B2701E42400BB6B41 /* Transcript Reader Extension (iOS) */,
+				6E8294152701E42400BB6B41 /* Transcript Reader Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E8293EC2701E42400BB6B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E82941F2701E42400BB6B41 /* Icon.png in Resources */,
+				6E8293F72701E42400BB6B41 /* LaunchScreen.storyboard in Resources */,
+				6E82941D2701E42400BB6B41 /* Main.html in Resources */,
+				6E8294232701E42400BB6B41 /* Script.js in Resources */,
+				6E8294272701E42400BB6B41 /* Assets.xcassets in Resources */,
+				6E8293FA2701E42400BB6B41 /* Main.storyboard in Resources */,
+				6E8294212701E42400BB6B41 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8293FE2701E42400BB6B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E8294202701E42400BB6B41 /* Icon.png in Resources */,
+				6E8294222701E42400BB6B41 /* Style.css in Resources */,
+				6E8294062701E42400BB6B41 /* Main.storyboard in Resources */,
+				6E8294242701E42400BB6B41 /* Script.js in Resources */,
+				6E8294282701E42400BB6B41 /* Assets.xcassets in Resources */,
+				6E82941E2701E42400BB6B41 /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E82940A2701E42400BB6B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E8294312701E42400BB6B41 /* background.js in Resources */,
+				6EE02DC72705AAB100138D59 /* options.js in Resources */,
+				6E82942D2701E42400BB6B41 /* images in Resources */,
+				CB4FE1D0272A1A4000C2A448 /* frames in Resources */,
+				6E82944F2701E56800BB6B41 /* helper.js in Resources */,
+				CB4FE1CD272A1A3800C2A448 /* foreground in Resources */,
+				6E82942F2701E42400BB6B41 /* manifest.json in Resources */,
+				6E82942B2701E42400BB6B41 /* _locales in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8294142701E42400BB6B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E8294322701E42400BB6B41 /* background.js in Resources */,
+				6EE02DC82705AAB100138D59 /* options.js in Resources */,
+				6E82942E2701E42400BB6B41 /* images in Resources */,
+				CB4FE1D1272A1A4000C2A448 /* frames in Resources */,
+				6E8294502701E56800BB6B41 /* helper.js in Resources */,
+				CB4FE1CE272A1A3800C2A448 /* foreground in Resources */,
+				6E8294302701E42400BB6B41 /* manifest.json in Resources */,
+				6E82942C2701E42400BB6B41 /* _locales in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E8293EA2701E42400BB6B41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E8294252701E42400BB6B41 /* ViewController.swift in Sources */,
+				6E8293F22701E42400BB6B41 /* AppDelegate.swift in Sources */,
+				6E8293F42701E42400BB6B41 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8293FC2701E42400BB6B41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E8294262701E42400BB6B41 /* ViewController.swift in Sources */,
+				6E8294032701E42400BB6B41 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8294082701E42400BB6B41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E8294292701E42400BB6B41 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E8294122701E42400BB6B41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E82942A2701E42400BB6B41 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E82940F2701E42400BB6B41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E82940B2701E42400BB6B41 /* Transcript Reader Extension (iOS) */;
+			targetProxy = 6E82940E2701E42400BB6B41 /* PBXContainerItemProxy */;
+		};
+		6E8294192701E42400BB6B41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E8294152701E42400BB6B41 /* Transcript Reader Extension (macOS) */;
+			targetProxy = 6E8294182701E42400BB6B41 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6E8293D82701E41E00BB6B41 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E8293D92701E41E00BB6B41 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		6E8293F52701E42400BB6B41 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E8293F62701E42400BB6B41 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6E8293F82701E42400BB6B41 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E8293F92701E42400BB6B41 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6E8294042701E42400BB6B41 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E8294052701E42400BB6B41 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E82943B2701E42400BB6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6E82943C2701E42400BB6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		6E82943E2701E42400BB6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader.Extension";
+				PRODUCT_NAME = "Transcript Reader Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E82943F2701E42400BB6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader.Extension";
+				PRODUCT_NAME = "Transcript Reader Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E8294422701E42400BB6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader";
+				PRODUCT_NAME = "Transcript Reader";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E8294432701E42400BB6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader";
+				PRODUCT_NAME = "Transcript Reader";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E8294452701E42400BB6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Transcript Reader.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader.Extension";
+				PRODUCT_NAME = "Transcript Reader Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6E8294462701E42400BB6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Transcript Reader.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader.Extension";
+				PRODUCT_NAME = "Transcript Reader Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6E8294492701E42400BB6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Transcript Reader.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader";
+				PRODUCT_NAME = "Transcript Reader";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6E82944A2701E42400BB6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Transcript Reader.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Transcript Reader";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "shockerella.Transcript-Reader";
+				PRODUCT_NAME = "Transcript Reader";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E8293D52701E41E00BB6B41 /* Build configuration list for PBXProject "Transcript Reader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E82943B2701E42400BB6B41 /* Debug */,
+				6E82943C2701E42400BB6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E82943D2701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E82943E2701E42400BB6B41 /* Debug */,
+				6E82943F2701E42400BB6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E8294412701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E8294422701E42400BB6B41 /* Debug */,
+				6E8294432701E42400BB6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E8294442701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E8294452701E42400BB6B41 /* Debug */,
+				6E8294462701E42400BB6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E8294482701E42400BB6B41 /* Build configuration list for PBXNativeTarget "Transcript Reader (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E8294492701E42400BB6B41 /* Debug */,
+				6E82944A2701E42400BB6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E8293D22701E41E00BB6B41 /* Project object */;
+}
