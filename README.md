@@ -4,7 +4,7 @@ Reader view is a standard feature in Safari that allows users to read articles m
 ## Demos
 ![Demo of Transcript Reader working on YouTube.com](Resources/YouTubeDemo.gif)
 
-Want to see other demos? [Click here!](https://github.com/Appccessibility-Shox/Transcript-Reader/edit/main/DEMOS.md)
+Want to see other demos? [Click here!](https://github.com/Appccessibility-Shox/Transcript-Reader/blob/main/DEMOS.md)
 
 ## Features
 - Elegant design
