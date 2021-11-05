@@ -18,9 +18,8 @@ window.addEventListener("message", (event) => {
     video = document.querySelector("video")
     track = getPreferredTrack(video.textTracks)
     if (track) {
-      track.mode = "showing";
       track.oncuechange = function() {
-      track.activeCues.forEach((cue) => {
+      track.cues.forEach((cue) => {
         data = {
         "name": "currentFrameCueUpdate",
         "text": cue.text

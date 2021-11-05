@@ -48,74 +48,6 @@ class Reader extends HTMLElement {
 
 customElements.define('transcript-reader', Reader);
 
-function getRelevantVideo(srcUrl) {
-    if (srcUrl) {
-        return document.querySelector(`video[src='${srcUrl}']`)
-    } else if (document.querySelectorAll("video").length == 1) {
-        return document.querySelector("video")
-    } else {
-        largestVideoInViewport = getLargest(Array.from(document.querySelectorAll("video")).filter(elem => isInViewport(elem)))
-        if (largestVideoInViewport) {
-            return largestVideoInViewport
-        }
-        largestVideoInViewportHorizontally = getLargest(Array.from(document.querySelectorAll("video")).filter(elem => isInViewportHorizontally(elem)))
-        if (largestVideoInViewportHorizontally) {
-            return largestVideoInViewportHorizontally
-        }
-        largestPlayingVideo = getLargest(Array.from(document.querySelectorAll("video")).filter(elem => !elem.paused))
-        if (largestPlayingVideo) {
-            return largestPlayingVideo
-        }
-        
-        // hail mary case:
-        if (document.querySelector("video")) {
-            return document.querySelector("video")
-        }
-        
-        // total failure. Unable to find any videos.
-        alert("Transcript Reader could not find a video on this page. This may be because the video is contained in an iframe. If this was the case, no need to mark an error.")
-        return null
-    }
-}
-
-function createReader() {
-    reader = document.createElement("transcript-reader");
-    document.body.appendChild(reader);
-
-    // set color-theme (to adjust the window toolbar color)
-    metaLight = document.createElement("meta")
-    metaLight.name = "theme-color"
-    metaLight.classList.add("tr-theme-color")
-    metaLight.content = "rgb(230,230,230)"
-    metaLight.media = "(prefers-color-scheme: light)"
-    document.head.prepend(metaLight)
-    
-    metaDark = document.createElement("meta")
-    metaDark.name = "theme-color"
-    metaDark.classList.add("tr-theme-color")
-    metaDark.content = "rgb(0,0,0)"
-    metaDark.media = "(prefers-color-scheme: dark)"
-    document.head.prepend(metaDark)
-    
-    // stop click and keypress events from working while reader is active. This is useful for sites like youtube that wanna play in the bg when (space) or go fullscreen when (f).
-    window.onkeydown = function(e) {if (document.querySelector("transcript-reader")) {return false} }
-    window.onclick = function(e) {if (document.querySelector("transcript-reader")) {return false} }
-
-    container = reader.shadowRoot.querySelector("#tr-article-container")
-    transcript = reader.shadowRoot.querySelector("#transcript")
-    background = reader.shadowRoot.querySelector("#background");
-    videoContainer = reader.shadowRoot.querySelector("#tr-video-container");
-    
-    return [reader, container, transcript, background, videoContainer]
-}
-
-function createEmbeddedFrame(getEmbedLinkFunction) {
-    embeddedFrame = document.createElement("iframe")
-    embeddedFrame.src = getEmbedLinkFunction();
-    embeddedFrame.style = "border: none;";
-    return embeddedFrame
-}
-
 String.prototype.toSeconds = function () {     if (!this) return null;     var hms = this.split(':');     return (+hms[0]) * 60 + (+hms[1] || 0);  }
 
 // Sometimes many tracks are available. To know which to display, we use the criteria of language (preferring English). Eventually, we'll want users to be able to set their own preferred language in the containing app.
@@ -333,45 +265,12 @@ function continuallySetTrackToShowingUntilCuesExist(video) {
     
 }
 
-const isEmphasized = (element) => {
-    return Array.from(element?.classList).includes("currentPhrase")
-}
-
 // courtesy of gafi on Stack Overflow https://stackoverflow.com/questions/586182/how-to-insert-an-item-into-an-array-at-a-specific-index-javascript
 const insert = (arr, index, newItem) => [
   ...arr.slice(0, index),
   newItem,
   ...arr.slice(index)
 ]
-
-// courtesy of Roman Perekhest https://stackoverflow.com/questions/37365512/count-the-number-of-times-a-same-value-appears-in-a-javascript-array
-function getOccurrence(array, value) {
-    return array.filter((v) => (v === value)).length;
-}
-
-function removeLineBreaks(string) {
-    if (typeof string !== "string") {
-        throw "Attempted to remove line breaks from a non-string."
-    } else {
-     return string.replace(/(\r\n|\n|\r)/gm, " ")
-    }
-}
-
-var stringToHTML = function (str) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(str, 'text/html');
-  return doc.body;
-};
-
-function getPortConnection(msg) {
-  return new Promise((resolve, reject) => {
-    window.addEventListener("message", function(e) {
-      if (e.data == msg) {
-        resolve(e.ports[0])
-      }
-    })
-  })
-}
 
 const blurbTypes = {
   CONTINUOUS: 'continuous',
@@ -543,3 +442,116 @@ Object.defineProperty(TranscriptData.prototype, 'trackIsLazyLoaded', {
 // convertVTTtoJSON. May be useful. Credits to Joe Gesualdo https://github.com/joegesualdo/vtt-to-json/blob/master/index.js
 // this fetch("dist/mediaelement.vtt").then(result => result.text()).then(vtt => convertVttToJson(vtt)).then(json => console.log(json))
 // worked on http://www.mediaelementjs.com
+
+// unified getTranscript.
+function getTranscript(options, video, port) {
+  console.log("transcribing2.")
+  const transcript = new Promise( async (resolve, reject) => {
+  
+    runningInSubFrame = window.self !== window.top;
+    runningInMainWindow = !runningInSubFrame;
+    portProvided = port != null;
+    
+    if (portProvided) {
+      port.addEventListener("message", function(e) {
+        if (e.data.name == "getTranscriptResponse") {
+          var transcriptData = new TranscriptData(null, e.data.blurbs, e.data.duration, e.data.startTimes);
+          resolve(transcriptData)
+        }
+      })
+      port.start();
+      port.postMessage("getTranscript");
+      return;
+    }
+    
+    console.log(runningInSubFrame, video)
+    
+    if (!video) { reject("Video not found.") }
+    
+    tracks = video.textTracks;
+    track = getPreferredTrack(tracks);
+    
+    if (track) { undisableTrack(track) }
+    
+    switch (options.transcriptSource) {
+      case transcriptSources.TRACK: {
+        if (!track.cues) {
+          continuallySetTrackToShowingUntilCuesExist(video)
+            .catch((err) => reject(err));
+        }
+        
+        const transcriptData = new TranscriptData(track, null, video.duration);
+        if (runningInSubFrame) {
+          updateForegroundOfNewCues(track);
+        }
+        
+        if (transcriptData.trackIsLazyLoaded) {
+          // TODO: refactor this redundant code (the switch statement is copy-pasted).
+          scrubPreference = options.trackScrubOption;
+          if (!scrubPreference && runningInSubFrame) {
+            await requestConfirmationResultFromMainWindow().then(userResponse => scrubPreference = userResponse)
+          } else if (!scrubPreference && runningInMainWindow) {
+            presentConfirmDialogs(() => {scrubPreference = trackScrubOptions.OUTSET}, () => {scrubPreference = trackScrubOptions.REAL_TIME}, () => reject("Aborted by user."))
+          }
+          switch (scrubPreference) {
+            case trackScrubOptions.REAL_TIME:
+              resolve(transcriptData);
+              break;
+            case trackScrubOptions.OUTSET:
+              scrubEntireVideo(video, 5).then(() => {
+                video.playbackRate = 1;
+                resolve(transcriptData);
+              });
+              break;
+          }
+        } else {
+          resolve(transcriptData);
+        }
+        break;
+      }
+      case transcriptSources.TRANSCRIPT:
+        options.openTranscript()
+          .then(() => {
+            const texts = Array.from(document.querySelectorAll(options.cueTextSelector)).map((element) => element.innerText);
+            const startTimes = Array.from(document.querySelectorAll(options.timeStampSelector)).map((element) => element.innerText).map((hms) => hms.toSeconds());
+            const transcriptData = new TranscriptData(track, texts, video.duration, startTimes);
+            resolve(transcriptData);
+          })
+          .catch((error) => reject(error));
+        break;
+      case transcriptSources.FETCH:
+        options.fetchTranscript()
+          .then((transcriptData) => resolve(transcriptData))
+          .catch((error) => reject(error));
+        break;
+      case transcriptSources.PLAIN_TEXT:
+        var possibleSources = Array.from(document.querySelectorAll(options.plainTextSelector));
+
+        if (options.joinPlainTextSelectorMatches) {
+          script = Array.from(document.querySelectorAll(options.plainTextSelector)).map((match) => match.innerText).join(' ');
+          const transcriptData = new TranscriptData(track, [script], video.duration);
+          resolve(transcriptData);
+        }
+
+        if (possibleSources.length === 0) {
+          reject(new Error(`Searched for plaintext transcript at selector matching ${options.plainTextSelector}, but couldn't find any elements matching this selector.`));
+        } else if (possibleSources.length === 1) {
+          const transcriptData = new TranscriptData(track, [document.querySelector(options.plainTextSelector).innerText], video.duration);
+          resolve(transcriptData);
+        } else if (track.cues) {
+          // When there are multiple matches of the plainTextSelector, we might be able to use the track to know which to use.
+          const knownTextString = Array.from(track.cues).map((cue) => cue.text).join(' ');
+          const bestMatch = getBestMatch(knownTextString, possibleSources);
+          const transcriptData = new TranscriptData(track, [bestMatch.innerText], video.duration);
+          resolve(transcriptData);
+        } else {
+          reject(new Error('Unfortunately, multiple matches existed for the transcript selector, and we were not able to use the track to determine which was right. Hence, the following transcript might be incorrect. Please consider filing an issue at https://github.com/Appccessibility-Shox/Transcript-Reader/issues'));
+        }
+        break;
+      default:
+        reject(new Error("Couldn't get transcript. The options object's transcript source property must be set to either 'track', 'transcript', 'plaintext' or 'fetch'."));
+    }
+  })
+  
+  return transcript
+}

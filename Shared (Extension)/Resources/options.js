@@ -156,7 +156,7 @@ const youTubeOptionsAlternative3 = {
     
     startTime = document.querySelector("video").currentTime;
     
-    return `https://www.youtube.com/embed/${videoID}?fs=0&amp;modestbranding=1&amp;start=${Math.round(startTime)}`
+    return `https://www.youtube.com/embed/${videoID}?modestbranding=1&amp;start=${Math.round(startTime)}`
   }
 }
 
@@ -176,10 +176,10 @@ youTubeOptionsAlternative2 = {
     
     startTime = document.querySelector("video").currentTime;
     
-    return `https://www.youtube.com/embed/${videoID}?fs=0&amp;modestbranding=1&amp;start=${Math.round(startTime)}`
+    return `https://www.youtube.com/embed/${videoID}?modestbranding=1&amp;start=${Math.round(startTime)}`
   },
   "transcriptSource": transcriptSources.FETCH,
-  "fetchTranscript": function(srcUrl) {
+  "fetchTranscript": function() {
     // inspired by Mr. Polywhirl on Stack Overflow.
     function getYouTubeVideoIDFromURL(url){
       // courtesy of Lasnv on Stack Overflow.
@@ -238,10 +238,10 @@ const youTubeOptionsAlternative1 = {
     
     startTime = document.querySelector("video").currentTime;
     
-    return `https://www.youtube.com/embed/${videoID}?fs=0&amp;modestbranding=1&amp;start=${Math.round(startTime)}`
+    return `https://www.youtube.com/embed/${videoID}?modestbranding=1&amp;start=${Math.round(startTime)}`
   },
   "transcriptSource": transcriptSources.FETCH,
-  "fetchTranscript": function(srcUrl) {
+  "fetchTranscript": function() {
     // inspired by Mr. Polywhirl on Stack Overflow.
     function getYouTubeVideoIDFromURL(url){
       // courtesy of Lasnv on Stack Overflow.
@@ -294,10 +294,10 @@ const youTubeOptions = {
     
     startTime = document.querySelector("video").currentTime;
     
-    return `https://www.youtube.com/embed/${videoID}?fs=0&amp;modestbranding=1&amp;start=${Math.round(startTime)}`
+    return `https://www.youtube.com/embed/${videoID}?modestbranding=1&amp;start=${Math.round(startTime)}`
   },
   "transcriptSource": transcriptSources.FETCH,
-  "fetchTranscript": function(srcUrl) {
+  "fetchTranscript": function() {
     // inspired by Mr. Polywhirl on Stack Overflow.
     function getYouTubeVideoIDFromURL(url){
       // courtesy of Lasnv on Stack Overflow.
@@ -306,7 +306,7 @@ const youTubeOptions = {
       return (match&&match[7].length==11)? match[7] : false;
     }
     
-    videoID = getYouTubeVideoIDFromURL((srcUrl || window.location.href));
+    videoID = getYouTubeVideoIDFromURL(window.location.href);
     
     listUrl = `https://video.google.com/timedtext?type=list&v=${videoID}`
     
