@@ -63,7 +63,7 @@ async function main(options) {
   try {
     if (crossOrigin) {
       transcriptChannelPort = await getPortConnection("Transcript Channel Port");
-      getPortConnection("Confirmation Channel Port").then(port => {
+      getPortConnection("Confirmation Channel Port").then((port) => {
         if (confirm("This video's cues are being lazy loaded. Would you like to scrub them?")) {
           if (confirm('Click okay if you want to scrub at the outset, or cancel to do it in realtime.')) {
             port.postMessage({result: trackScrubOptions.OUTSET});

@@ -42,7 +42,6 @@ async function main(options) {
     await options.prepare(video);
   }
   
-
   try {
     transcriptData = await getTranscript(options, video);
     return Promise.resolve(transcriptData)
@@ -69,7 +68,7 @@ function getTranscript(options, video) {
           continuallySetTrackToShowingUntilCuesExist(video)
             .catch((err) => reject(err));
         }
-
+        
         const transcriptData = new TranscriptData(track, null, video.duration);
         updateForegroundOfNewCues(track);
         

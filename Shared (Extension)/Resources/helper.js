@@ -1,4 +1,4 @@
-html = document.querySelector("html")
+html = document.querySelector("html");
 
 class Reader extends HTMLElement {
   constructor() {
@@ -358,9 +358,9 @@ function removeLineBreaks(string) {
 }
 
 var stringToHTML = function (str) {
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(str, 'text/html');
-	return doc.body;
+  var parser = new DOMParser();
+  var doc = parser.parseFromString(str, 'text/html');
+  return doc.body;
 };
 
 function getPortConnection(msg) {
@@ -378,7 +378,7 @@ const blurbTypes = {
   DIVIDED: 'divided',
 };
 
-// readerCues is the object that getTranscript should return. The reason for encapsulating is simple: there are lots of ways a track can exist.
+// TranscriptData is the object that getTranscript should return. The reason for encapsulating is simple: there are lots of ways a track can exist.
 function TranscriptData(track, blurbs, duration, startTimes, endTimes) { // track is a TextTrack and blurbs is an array of strings (possibly unbroken).
   // core variables.
   this.track = track;
@@ -400,7 +400,6 @@ function TranscriptData(track, blurbs, duration, startTimes, endTimes) { // trac
   
   this.texts = blurbs ?? (track?.cues ? Array.from(this.track.cues).map((cue) => cue.text) : [])
 
-  // functions
   this.toHTML = function () {
     //  consider whether we even want to have startTimes listed at the div level.
     if (!this.blurbs && this.track) {
@@ -501,7 +500,6 @@ function TranscriptData(track, blurbs, duration, startTimes, endTimes) { // trac
     }
   };
 
-  // TODO: create a custom event called "onaddtrack" which runs via overriding addTrack prototype.
 }
 
 Object.defineProperty(TranscriptData.prototype, 'timesKnown', {
