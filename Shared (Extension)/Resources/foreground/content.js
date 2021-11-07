@@ -72,7 +72,7 @@ async function main(options) {
     if (options.hasOwnProperty('alternative')) {
       main(options.alternative);
     } else {
-      alert("Error gather transcript: " + error)
+      alert("Error gathering transcript: " + error)
     }
     return;
   }

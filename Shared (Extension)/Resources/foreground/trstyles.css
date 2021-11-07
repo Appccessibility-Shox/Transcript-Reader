@@ -75,19 +75,31 @@
 
 #article {
   background-color: var(--articleBackgroundColor);
-  outline: 1px solid var(--articleOutlineColor);
   min-height: 100%;
-  margin: 22px auto 0 auto;
-  /* width: 100%; */
-  max-width: 800px;
   font-size: 16px;
   line-height: 26px;
   font-family: Athelas, Helvetica, sans-serif;
   color: var(--unwatchedFontColor) !important;
   padding-top: 2%;
   margin-bottom: 12vh !important;
-  max-width: 104ex;
   box-shadow: 0px 6px 12px 3px rgb(0,0,0,.2);
+}
+
+/* no paper displayed */
+@media only screen and (max-width: 1200px) {
+  #article {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+
+/* paper shows only for large screen widths */
+@media only screen and (min-width: 1200px) {
+  #article {
+    max-width: 104ex;
+    margin: 22px auto 0 auto;
+    outline: 1px solid var(--articleOutlineColor);
+  }
 }
 
 #transcript {
@@ -114,11 +126,6 @@
 #background.disappearing {
   animation: .4s linear fadeOut;
 }
-
-/*
-#background .ytp-pause-overlay {
-  visibility: hidden !important;
-} */
 
 #tr-video-container {
   width: 100%;
