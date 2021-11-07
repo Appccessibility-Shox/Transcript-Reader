@@ -1,6 +1,6 @@
 <h1 align="center">
   <span align="center">
-    Transcript Reader for Safari (0.1 – Public Beta) <img src="Resources/icon.png" alt="logo" width="32" height="32">
+    Transcript Reader for Safari (0.1 – Public Beta) <img src="Resources/icon.png" alt="logo" width="50" height="50">
   </span>
 </h1>
 Reader view is a standard feature in Safari that allows users to read articles more comfortably. Transcript Reader extends this concept to video subtitles. Transcript Reader invites video watchers to select, search, copy, Quick note, and read ahead.
