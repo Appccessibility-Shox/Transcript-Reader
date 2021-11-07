@@ -60,7 +60,7 @@ function getPreferredTrack(listOfTracks) {
     } else if (listOfTracks.length > 0) {
         return listOfTracks[0]
     } else {
-      console.log("An appropriate TextTrack could not be found for this video.")
+      console.log(new Error("An appropriate TextTrack could not be found for this video."))
       return null
     }
 }
@@ -443,7 +443,6 @@ Object.defineProperty(TranscriptData.prototype, 'trackIsLazyLoaded', {
 // this fetch("dist/mediaelement.vtt").then(result => result.text()).then(vtt => convertVttToJson(vtt)).then(json => console.log(json))
 // worked on http://www.mediaelementjs.com
 
-// unified getTranscript.
 function getTranscript(options, video, port) {
   console.log("transcribing2.")
   const transcript = new Promise( async (resolve, reject) => {

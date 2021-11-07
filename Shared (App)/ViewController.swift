@@ -56,11 +56,17 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
     }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        
-        if (message.body as! String == "open-issues") {
-            NSWorkspace.shared.open(NSURL(string: "https://github.com/Appccessibility-Shox/Transcript-Reader/issues")! as URL)
-        }
-        
+    
+#if os(iOS)
+    if (message.body as! String == "open-issues") {
+        UIApplication.shared.open(URL(string: "https://github.com/Appccessibility-Shox/Transcript-Reader/issues")!)
+    }
+#elseif os(macOS)
+    if (message.body as! String == "open-issues") {
+        NSWorkspace.shared.open(URL(string: "https://github.com/Appccessibility-Shox/Transcript-Reader/issues")!)
+    }
+#endif
+
 #if os(macOS)
         if (message.body as! String != "open-preferences") {
             return;

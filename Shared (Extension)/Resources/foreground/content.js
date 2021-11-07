@@ -72,7 +72,7 @@ async function main(options) {
     if (options.hasOwnProperty('alternative')) {
       main(options.alternative);
     } else {
-      console.log(error)
+      alert("Error gather transcript: " + error)
     }
     return;
   }
@@ -151,7 +151,7 @@ async function main(options) {
     window.addEventListener("message", (event) => {
       if (event.data.name == "currentFrameTimeUpdate") {
           colorCue(transcriptData, transcript, event.data.time);
-      } else if (event.data.name == "currentFrameCueUpdate") {
+      } else if (event.data.name == "currentFrameActiveCueUpdate") {
           colorCue(transcriptData, transcript, event.data.text);
       }
     });

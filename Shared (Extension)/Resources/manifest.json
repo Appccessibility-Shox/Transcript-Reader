@@ -46,7 +46,7 @@
         }
     },
 
-    "permissions": [ "contextMenus", "webNavigation", "activeTab" ],
+    "permissions": [ "contextMenus", "activeTab" ],
     
     "web_accessible_resources": ["foreground/trstyles.css"]
 }
