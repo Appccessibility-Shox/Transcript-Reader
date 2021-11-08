@@ -1,3 +1,34 @@
+// choose option set based on url.
+function getOptionSet() {
+  return new Promise((resolve, reject) => {
+    if (window.location.hostname === 'www.youtube.com') {
+      resolve(youTubeOptions);
+    } else if (window.location.hostname === 'www.ted.com') {
+      resolve(tedOptions);
+    } else if (window.location.hostname === 'www.nytimes.com') {
+      resolve(NYTOptions);
+    } else if (frameUrl !== null && new URL(frameUrl).hostname === 'www.youtube.com') {
+      youTubeOptions.getEmbedLink = function () {
+        return frameUrl;
+      };
+      delete youTubeOptions.alternative;
+      resolve(youTubeOptions);
+    } else if (window.location.hostname === 'www.washingtonpost.com') {
+      resolve(WaPoOptions);
+    } else if (window.location.hostname === 'www.wsj.com') {
+      resolve(WSJOptions);
+    } else if (window.location.hostname === 'vimeo.com') {
+      resolve(vimeoOptions);
+    } else if (frameUrl !== null && new URL(frameUrl).hostname === 'player.vimeo.com') {
+      resolve(vimeoCrossOriginOptions)
+    } else if (crossOrigin) {
+      resolve(defaultCrossOriginOptions)
+    } else {
+      resolve(defaultOptions);
+    }
+  })
+}
+
 function colorCue(transcriptData, transcript, query) {
   const [text, startTime, index] = transcriptData.currentlyPlayingPhraseProperties(query);
   const currentlyEmphasizedCue = transcript.querySelector('.currentPhrase');
@@ -162,6 +193,13 @@ function createReader() {
     metaDark.media = "(prefers-color-scheme: dark)"
     document.head.prepend(metaDark)
     
+    metaScale = document.createElement("meta");
+    metaScale.name = "viewport";
+    metaScale.content = "width=device-width, initial-scale=1";
+    metaScale.id = "metaScale"
+    document.head.prepend(metaScale)
+    /* TODO: remove this at the end. */
+    
     // stop click and keypress events from working while reader is active. This is useful for sites like youtube that wanna play in the bg when (space) or go fullscreen when (f).
     /* window.onkeydown = function(e) {if (document.querySelector("transcript-reader")) {return false} }
     window.onclick = function(e) {if (document.querySelector("transcript-reader")) {return false} } */
@@ -214,6 +252,7 @@ function getRelevantVideo(srcUrl) {
 function teardown(options, inserted, reader) {
   html.classList.remove("tr-enabled");
   document.querySelectorAll(".tr-theme-color").forEach(metaTag => metaTag.remove())
+  document.querySelector("#metaScale").remove()
   Array.from(document.querySelectorAll(".tr-added-player-controls")).forEach(video => {video.removeAttribute("controls"); video.classList.remove("tr-added-player-controls")})
   document.querySelectorAll(".tr-theme-color").forEach(metaTag => metaTag.remove())
   background.classList.add('disappearing');
