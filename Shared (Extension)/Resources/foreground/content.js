@@ -2,6 +2,7 @@ var frameUrl;
 var crossOrigin;
 var transcriptChannelPort;
 var confirmationChannelPort;
+var lastUsedOptions;
 
 var currentlyRunning = false;
 
@@ -19,31 +20,16 @@ browser.runtime.onMessage.addListener((msg) => {
   
   if (!currentlyRunning && (triggeredByContextMenu || triggeredByToolbarItem)) {
     currentlyRunning = true;
-    if (window.location.hostname === 'www.youtube.com') {
-      main(youTubeOptions);
-    } else if (window.location.hostname === 'www.ted.com') {
-      main(tedOptions);
-    } else if (window.location.hostname === 'www.nytimes.com') {
-      main(NYTOptions);
-    } else if (frameUrl !== null && new URL(frameUrl).hostname === 'www.youtube.com') {
-      youTubeOptions.getEmbedLink = function () {
-        return frameUrl;
-      };
-      delete youTubeOptions.alternative;
-      main(youTubeOptions);
-    } else if (window.location.hostname === 'www.washingtonpost.com') {
-      main(WaPoOptions);
-    } else if (window.location.hostname === 'www.wsj.com') {
-      main(WSJOptions);
-    } else if (window.location.hostname === 'vimeo.com') {
-      main(vimeoOptions);
-    } else if (frameUrl !== null && new URL(frameUrl).hostname === 'player.vimeo.com') {
-      main(vimeoCrossOriginOptions)
-    } else if (crossOrigin) {
-      main(defaultCrossOriginOptions)
-    } else {
-      main(defaultOptions);
-    }
+    getOptionSet().then(options => {
+      lastUsedOptions = options;
+      main(options)
+    })
+  } else if (!!document.querySelector("transcript-reader") && triggeredByToolbarItem) {
+    // tapping the toolbar item when the reader is already displayed should safely teardown the reader.
+    currentlyRunning = false;
+    insertedVideo = document.querySelector("transcript-reader").shadowRoot.querySelector("video")
+    reader = document.querySelector("transcript-reader")
+    teardown(lastUsedOptions, insertedVideo, reader)
   }
 });
 
@@ -70,6 +56,7 @@ async function main(options) {
     var transcriptData = await getTranscript(options, video, transcriptChannelPort);
   } catch (error) {
     if (options.hasOwnProperty('alternative')) {
+      lastUsedOptions = options.alternative;
       main(options.alternative);
     } else {
       alert("Error gathering transcript: " + error)

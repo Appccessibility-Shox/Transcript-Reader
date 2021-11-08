@@ -76,8 +76,9 @@
 #article {
   background-color: var(--articleBackgroundColor);
   min-height: 100%;
-  font-size: 16px;
-  line-height: 26px;
+  max-width: 104ex;
+  margin: 22px auto 0 auto;
+  font-size: 19px;
   font-family: Athelas, Helvetica, sans-serif;
   color: var(--unwatchedFontColor) !important;
   padding-top: 2%;
@@ -85,25 +86,26 @@
   box-shadow: 0px 6px 12px 3px rgb(0,0,0,.2);
 }
 
-/* no paper displayed */
-@media only screen and (max-width: 1200px) {
-  #article {
-    padding-left: 70px;
-    padding-right: 70px;
-  }
+ /* no paper displayed */
+#background:not(.paper) {
+  background-color: var(--articleBackgroundColor);
+  max-width: 100%;
+}
+
+#background:not(.paper) #article {
+  box-shadow: none;
 }
 
 /* paper shows only for large screen widths */
-@media only screen and (min-width: 1200px) {
-  #article {
-    max-width: 104ex;
-    margin: 22px auto 0 auto;
-    outline: 1px solid var(--articleOutlineColor);
-  }
+#background.paper #article {
+  outline: 1px solid var(--articleOutlineColor);
 }
+
 
 #transcript {
   overflow: hidden;
+  font-size: 19px;
+  line-height: 29px; /* mat be 16 and 26 on mac? */
   padding: 25px 70px 70px;
 }
 

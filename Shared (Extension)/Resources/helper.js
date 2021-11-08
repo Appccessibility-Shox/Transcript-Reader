@@ -43,6 +43,21 @@ class Reader extends HTMLElement {
     transcript.id = "transcript";
     article.appendChild(transcript);
 
+    this.decidePaperStatus = function() {
+      const windowWidth = window.innerWidth;
+      const transcriptWidth = transcript.getBoundingClientRect().width;
+      if (transcriptWidth + 140 < windowWidth) {
+        background.classList.add("paper")
+      } else {
+        background.classList.remove("paper")
+      }
+    }
+    
+    window.addEventListener("resize", this.decidePaperStatus)
+  }
+  
+  connectedCallback() {
+    this.decidePaperStatus();
   }
 }
 
