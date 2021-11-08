@@ -382,8 +382,7 @@ const vimeoOptions = {
 defaultCrossOriginOptions = {
   "videoSource": videoSources.EMBED_VIDEO,
   "getEmbedLink": function() {
-  console.log(frameUrl)
-  return frameUrl;
+    return frameUrl;
   },
   "transcriptSource": transcriptSources.TRACK,
 }
@@ -391,8 +390,7 @@ defaultCrossOriginOptions = {
 vimeoCrossOriginOptions = {
   "videoSource": videoSources.EMBED_VIDEO,
   "getEmbedLink": function() {
-  console.log(frameUrl)
-  return frameUrl;
+    return frameUrl;
   },
   "transcriptSource": transcriptSources.TRACK,
   "trackScrubOption": trackScrubOptions.REAL_TIME

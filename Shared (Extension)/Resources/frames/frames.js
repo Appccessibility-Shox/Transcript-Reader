@@ -34,4 +34,17 @@ window.addEventListener("message", (event) => {
     }
     
   }
+  
+  if (event.data == "Do You Contain A Video?") {
+    port = event.ports[0]
+    if (!!document.querySelector("video")) {
+      port.postMessage({containmentStatus: true, frameUrl: window.location.href})
+    } else {
+      port.postMessage({containmentStatus: false, frameUrl: window.location.href})
+    }
+  }
+  
+  if (event.data === "selectedAsSourceFrameByTR") {
+    browser.runtime.sendMessage("inject source.js into me")
+  }
 }, false);
