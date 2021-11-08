@@ -45,8 +45,8 @@ class Reader extends HTMLElement {
 
     this.decidePaperStatus = function() {
       const windowWidth = window.innerWidth;
-      const transcriptWidth = transcript.getBoundingClientRect().width;
-      if (transcriptWidth + 140 < windowWidth) {
+      const articleWidth = article.getBoundingClientRect().width;
+      if (articleWidth + 140 < windowWidth) {
         background.classList.add("paper")
       } else {
         background.classList.remove("paper")
@@ -160,17 +160,18 @@ function isInViewportHorizontally(elem) {
 }
 
 // Courtesy of Mohammed Mansour on Stack Overflow https://stackoverflow.com/questions/3724738/how-do-i-extract-the-largest-image-by-dimension-on-a-site-given-the-url
-function getLargest(arrayOfElements) {
+function getLargestData(arrayOfData) {
     var maxDimension = 0;
-    var maxElement = null;
-    for (element of arrayOfElements) {
+    var maxData = null;
+    for (data of arrayOfData) {
+        element = data.element
         var currDimension = element.getBoundingClientRect().width * element.getBoundingClientRect().height;
         if (currDimension  > maxDimension){
             maxDimension = currDimension
-            maxElement = element;
+            maxData = data;
         }
     }
-    return maxElement;
+    return maxData;
 }
 
 // Courtesy of rijkvanzanten on Gist https://gist.github.com/rijkvanzanten/df73ae28e80b9c6e5030baed4d1a90a6

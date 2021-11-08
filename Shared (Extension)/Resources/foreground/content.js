@@ -1,4 +1,5 @@
 var frameUrl;
+var srcUrl;
 var crossOrigin;
 var transcriptChannelPort;
 var confirmationChannelPort;
@@ -10,12 +11,18 @@ browser.runtime.onMessage.addListener((msg) => {
   var triggeredByContextMenu = msg.action === 'contextMenuItemClicked'
   var triggeredByToolbarItem = msg.action === 'readerToolbarButtonClicked'
   
-  if (triggeredByContextMenu) {
-    frameUrl = msg.frameUrl;
+  if (msg.frameUrl) {
+    frameUrl = msg.frameUrl
     crossOrigin = new URL(frameUrl).hostname !== window.location.hostname
-  } else if (triggeredByToolbarItem) {
-    frameUrl = null;
-    crossOrigin = false;
+  } else {
+    frameUrl = null
+    crossOrigin = false
+  }
+  
+  if (msg.srcUrl) {
+    srcUrl = msg.srcUrl
+  } else {
+    srcUrl = null
   }
   
   if (!currentlyRunning && (triggeredByContextMenu || triggeredByToolbarItem)) {
@@ -34,20 +41,32 @@ browser.runtime.onMessage.addListener((msg) => {
 });
 
 async function main(options) {
-
-  const video = getRelevantVideo(frameUrl);
-
-  if (!options.hasOwnProperty('prepare') || crossOrigin) {
+  
+  // select a relevant player, based on srcUrl (if it exists) or
+  var video = null;
+  if (!frameUrl) {
+    // ^ if there's a frameUrl, that means the background script would have already injected source.js into the source video, so there's no need to do anything else.
+    player = await getRelevantVideo(srcUrl);
+    video = player.element;
+    if (video.tagName === "IFRAME") {
+      video.contentWindow.postMessage("selectedAsSourceFrameByTR", "*")
+      video = null;
+      frameUrl = player.frameUrl;
+      options = defaultCrossOriginOptions;
+    }
+  }
+  
+  if (!options.hasOwnProperty('prepare') || frameUrl) {
     options.prepare = function () {
       return Promise.resolve();
     };
   }
 
   await options.prepare(video);
-
+  
   // get transcript.
   try {
-    if (crossOrigin) {
+    if (frameUrl) {
       transcriptChannelPort = await getPortConnection("Transcript Channel Port");
       getPortConnection("Confirmation Channel Port").then((port) => {
         presentConfirmDialogs(() => {port.postMessage({result: trackScrubOptions.OUTSET})}, () => {port.postMessage({result: trackScrubOptions.REAL_TIME})}, () => {port.postMessage({error: "Aborted by user."})})

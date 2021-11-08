@@ -219,34 +219,73 @@ function createEmbeddedFrame(getEmbedLinkFunction) {
     return embeddedFrame
 }
 
-function getRelevantVideo(srcUrl) {
-    if (srcUrl) {
-        return document.querySelector(`video[src='${srcUrl}']`)
-    } else if (document.querySelectorAll("video").length == 1) {
-        return document.querySelector("video")
-    } else {
-        largestVideoInViewport = getLargest(Array.from(document.querySelectorAll("video")).filter(elem => isInViewport(elem)))
-        if (largestVideoInViewport) {
-            return largestVideoInViewport
-        }
-        largestVideoInViewportHorizontally = getLargest(Array.from(document.querySelectorAll("video")).filter(elem => isInViewportHorizontally(elem)))
-        if (largestVideoInViewportHorizontally) {
-            return largestVideoInViewportHorizontally
-        }
-        largestPlayingVideo = getLargest(Array.from(document.querySelectorAll("video")).filter(elem => !elem.paused))
-        if (largestPlayingVideo) {
-            return largestPlayingVideo
-        }
-        
-        // hail mary case:
-        if (document.querySelector("video")) {
-            return document.querySelector("video")
-        }
-        
-        // total failure. Unable to find any videos.
-        alert("Transcript Reader could not find a video on this page. This may be because the video is contained in an iframe. If this was the case, no need to mark an error.")
-        return null
+function videoContainmentStatusOfIframe(iframe) {
+  return new Promise((resolve, reject) => {
+    var channel = new MessageChannel();
+    channel.port1.onmessage = ({data}) => {
+      channel.port1.close();
+      resolve(data)
     }
+    iframe.contentWindow.postMessage("Do You Contain A Video?", "*", [channel.port2])
+  })
+}
+
+async function getRelevantVideo(srcUrl) {
+    if (srcUrl) {
+        if (!getVideoElementFromSrcUrl(srcUrl)) { alert("Was not able to find video with provided srcUrl.")}
+        else { return getVideoElementFromSrcUrl(srcUrl) }
+    }
+    
+    // We need to gather ALL videos, even those in iframes. Here are the steps:
+    // 1. send a message out to every iframe.
+    // 2. Await their response letting us know if they contain a video (and ideally whether that video is playing).
+    // 3. Treat iframes containing videos as if they were videos: selecting the largest in the viewport.
+    
+    iframes = document.querySelectorAll("iframe")
+    iframesThatContainVideos = []
+    for (iframe of iframes) {
+      var data = await videoContainmentStatusOfIframe(iframe);
+      data.element = iframe
+      if (data.containmentStatus == true) {
+        iframesThatContainVideos.push(data)
+      }
+    }
+    videos = Array.from(document.querySelectorAll("video")).map(video => {
+      return {element: video};
+    })
+    
+    players = videos.concat(iframesThatContainVideos) // players is a list of data objects that contain the element and frameUrl if iframe.
+    
+    if (players.length == 0) {
+        alert("Transcript Reader could not find any videos on this page.")
+        return null
+    } else if (players.length == 1) {
+        return players[0]
+    }
+    
+    largestVideoInViewport = getLargestData(players.filter(data => isInViewport(data.element)))
+    if (largestVideoInViewport) {
+        return largestVideoInViewport
+    }
+    largestVideoInViewportHorizontally = getLargestData(players.filter(data => isInViewportHorizontally(data.element)))
+    if (largestVideoInViewportHorizontally) {
+        return largestVideoInViewportHorizontally
+    }
+    
+    return players[0]
+}
+
+function getVideoElementFromSrcUrl(srcUrl) {
+  schemeRelative = srcUrl.replace(/https?:\/\//, "");
+  videos = Array.from(document.querySelectorAll("video"))
+  for (video of videos) {
+    if (video.src == srcUrl || video.src == schemeRelative) { return video }
+  }
+  
+  sources = Array.from(document.querySelectorAll("source"))
+  for (source of sources) {
+    if (source.src == srcUrl || source.src == schemeRelative) {return source.closest("video")}
+  }
 }
 
 function teardown(options, inserted, reader) {
