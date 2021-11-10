@@ -233,7 +233,7 @@ function videoContainmentStatusOfIframe(iframe) {
 async function getRelevantVideo(srcUrl) {
     if (srcUrl) {
         if (!getVideoElementFromSrcUrl(srcUrl)) { alert("Was not able to find video with provided srcUrl.")}
-        else { return getVideoElementFromSrcUrl(srcUrl) }
+        else { return {element: getVideoElementFromSrcUrl(srcUrl)} }
     }
     
     // We need to gather ALL videos, even those in iframes. Here are the steps:

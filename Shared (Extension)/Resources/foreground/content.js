@@ -11,19 +11,11 @@ browser.runtime.onMessage.addListener((msg) => {
   var triggeredByContextMenu = msg.action === 'contextMenuItemClicked'
   var triggeredByToolbarItem = msg.action === 'readerToolbarButtonClicked'
   
-  if (msg.frameUrl) {
-    frameUrl = msg.frameUrl
-    crossOrigin = new URL(frameUrl).hostname !== window.location.hostname
-  } else {
-    frameUrl = null
-    crossOrigin = false
-  }
+  frameUrl = msg.frameUrl === undefined ? null : msg.frameUrl
+  srcUrl = msg.srcUrl === undefined ? null : msg.srcUrl
+  crossOrigin = (frameUrl && new URL(frameUrl).hostname !== window.location.hostname) ? true : false
   
-  if (msg.srcUrl) {
-    srcUrl = msg.srcUrl
-  } else {
-    srcUrl = null
-  }
+  console.log(frameUrl, srcUrl, crossOrigin)
   
   if (!currentlyRunning && (triggeredByContextMenu || triggeredByToolbarItem)) {
     currentlyRunning = true;
