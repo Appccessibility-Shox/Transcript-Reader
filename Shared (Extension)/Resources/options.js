@@ -92,6 +92,7 @@ const youTubeOptionsAlternative3 = {
   "videoSource": videoSources.EMBED_VIDEO,
   "transcriptSource": transcriptSources.TRANSCRIPT,
   "openTranscript": function() {
+    alert("yto3")
     document.querySelector("#info div#menu button[aria-label='More actions']").click();
     
     const openTranscript = new Promise((resolve, reject) => {
@@ -203,7 +204,7 @@ youTubeOptionsAlternative2 = {
     .then(a => a.json())
     .then(json => {
       if (unescaped.match(/v=([^&#]{5,})/)[1] != getYouTubeVideoIDFromURL(window.location.href)) {
-      throw "Video changed";
+        throw "Video changed";
       }
       startTimes = json.events.map(object => Math.round(object.tStartMs/1000))
       texts = json.events.map(object => object.segs).map(segs => {
@@ -252,14 +253,19 @@ const youTubeOptionsAlternative1 = {
   
     // The PHP implementation that inspired this is courtesy of Patrick Shyu.
     var regExp = new RegExp(/playerCaptionsTracklistRenderer.*?(youtube.com\/api\/timedtext.*?)"/);
-    escaped = regExp.exec(document.body.innerHTML)[1];
+    let escaped;
+    if (regExp.exec(document.body.innerHTML) && regExp.exec(document.body.innerHTML)[1]) {
+      escaped = regExp.exec(document.body.innerHTML)[1];
+    } else {
+      return Promise.reject("There must have been no video on the original page loaded.")
+    }
     unescaped = JSON.parse(`"https://${escaped}&format=json3"`);
     
     fetched = fetch(unescaped)
     .then(a => a.json())
     .then(json => {
       if (unescaped.match(/v=([^&#]{5,})/)[1] != getYouTubeVideoIDFromURL(window.location.href)) {
-      throw "Video changed";
+        throw "Video changed";
       }
       startTimes = json.events.map(object => Math.round(object.tStartMs/1000))
       texts = json.events.map(object => object.segs).map(segs => {

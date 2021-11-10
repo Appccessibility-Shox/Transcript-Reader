@@ -225,6 +225,7 @@ function videoContainmentStatusOfIframe(iframe) {
       channel.port1.close();
       resolve(data)
     }
+    setTimeout(() => reject("Promise timed out: Attempted to query whether an iframe contained a video, but recieved no response after .2 seconds."), 200)
     iframe.contentWindow.postMessage("Do You Contain A Video?", "*", [channel.port2])
   })
 }
@@ -243,7 +244,13 @@ async function getRelevantVideo(srcUrl) {
     iframes = document.querySelectorAll("iframe")
     iframesThatContainVideos = []
     for (iframe of iframes) {
-      var data = await videoContainmentStatusOfIframe(iframe);
+      let data;
+      try {
+        data = await videoContainmentStatusOfIframe(iframe);
+      } catch (err) {
+        console.log(err)
+        continue
+      }
       data.element = iframe
       if (data.containmentStatus == true) {
         iframesThatContainVideos.push(data)
