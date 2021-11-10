@@ -52,7 +52,11 @@ async function main(options) {
       video.contentWindow.postMessage("selectedAsSourceFrameByTR", "*")
       video = null;
       frameUrl = player.frameUrl;
-      options = defaultCrossOriginOptions;
+      crossOrigin = new URL(frameUrl).hostname !== window.location.hostname;
+      getOptionSet().then(newOptions => {
+        options = newOptions;
+        lastUsedOptions = newOptions;
+      });
     }
   }
   
