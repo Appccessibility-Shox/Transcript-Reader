@@ -27,7 +27,7 @@ function getOptionSet() {
     if (window.location.hostname === 'www.youtube.com') {
       resolve(youTubeOptions);
     } else if (window.location.hostname === 'player.vimeo.com') {
-      resolve(vimeoCrossOriginOptions);
+      resolve(vimeoOptions);
     } else {
       resolve(defaultOptions);
     }

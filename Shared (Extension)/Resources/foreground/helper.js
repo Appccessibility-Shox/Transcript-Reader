@@ -175,9 +175,6 @@ const isEmphasized = (element) => {
 }
 
 function createReader() {
-    reader = document.createElement("transcript-reader");
-    document.body.appendChild(reader);
-
     // set color-theme (to adjust the window toolbar color)
     metaLight = document.createElement("meta")
     metaLight.name = "theme-color"
@@ -198,7 +195,9 @@ function createReader() {
     metaScale.content = "width=device-width, initial-scale=1";
     metaScale.id = "metaScale"
     document.head.prepend(metaScale)
-    /* TODO: remove this at the end. */
+    
+    reader = document.createElement("transcript-reader");
+    document.body.appendChild(reader);
     
     // stop click and keypress events from working while reader is active. This is useful for sites like youtube that wanna play in the bg when (space) or go fullscreen when (f).
     /* window.onkeydown = function(e) {if (document.querySelector("transcript-reader")) {return false} }
