@@ -83,3 +83,9 @@ function requestConfirmationResultFromMainWindow() {
     mainWindow.postMessage("Confirmation Channel Port", "*", [confirmationChannel.port2]);
   })
 }
+
+window.addEventListener("message", (e) => {
+  if (e.data === "Did bg script make you a source frame?") {
+    mainWindow.postMessage("I'm the source frame activated by bg page.", "*")
+  }
+})

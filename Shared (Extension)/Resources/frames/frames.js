@@ -47,4 +47,22 @@ window.addEventListener("message", (event) => {
   if (event.data === "selectedAsSourceFrameByTR") {
     browser.runtime.sendMessage("inject source.js into me")
   }
+  
+  if (event.data === "What's the current time of your video?") {
+    video = document.querySelector("video")
+    if (!video) {
+      window.top.postMessage({name: "current time from frame", error: "No video exists in this frame"}, "*")
+    }
+    else {
+      currentTime = video.currentTime
+      window.top.postMessage({name: "current time from frame", result: currentTime}, "*")
+    }
+  }
+  
+  if (event.data?.name === "Set Time") {
+    timeToSetTo = event.data.time;
+    video = document.querySelector("video")
+    video.currentTime = timeToSetTo;
+  }
+  
 }, false);

@@ -4,6 +4,7 @@ var crossOrigin;
 var transcriptChannelPort;
 var confirmationChannelPort;
 var lastUsedOptions;
+var sourceWindow;
 
 var currentlyRunning = false;
 
@@ -34,24 +35,30 @@ browser.runtime.onMessage.addListener((msg) => {
 
 async function main(options) {
   
-  // select a relevant player, based on srcUrl (if it exists) or
+  // 1. get the relevant player.
+  // There's a little bit of complexity to this step due to one fact: when the user selects an iframe via the context menu, source.js is injected into it immediately by the background scrip and the content script thus has no reference to it. In that case, we use getSourceWindow() to just ask all frames to tell us if they have source.js injected. Only the one with source.js injected will know to respond in the affirmative. In the case where the background script doesn't inject source.js, we know that we get to decide which player (iframes + videos) should become the source frame. That's what is happening inside the if (!frameUrl) block.
   var video = null;
   if (!frameUrl) {
     // ^ if there's a frameUrl, that means the background script would have already injected source.js into the source video, so there's no need to do anything else.
-    player = await getRelevantVideo(srcUrl);
-    video = player.element;
-    if (video.tagName === "IFRAME") {
-      video.contentWindow.postMessage("selectedAsSourceFrameByTR", "*")
-      video = null;
-      frameUrl = player.frameUrl;
+    data = await getRelevantVideo(srcUrl);
+    player = data.element;
+    if (player.tagName === "IFRAME") {
+      sourceWindow = player.contentWindow
+      sourceWindow.postMessage("selectedAsSourceFrameByTR", "*")
+      frameUrl = data.frameUrl;
       crossOrigin = new URL(frameUrl).hostname !== window.location.hostname;
       getOptionSet().then(newOptions => {
         options = newOptions;
         lastUsedOptions = newOptions;
       });
+    } else if (player.tagName === "VIDEO") {
+      video = data.element
     }
+  } else {
+    sourceWindow = await getSourceWindow()
   }
   
+  // 2. run site-specific preparations.
   if (!options.hasOwnProperty('prepare') || frameUrl) {
     options.prepare = function () {
       return Promise.resolve();
@@ -60,7 +67,7 @@ async function main(options) {
 
   await options.prepare(video);
   
-  // get transcript.
+  // 3. get the transcript.
   try {
     if (frameUrl) {
       transcriptChannelPort = await getPortConnection("Transcript Channel Port");
@@ -79,17 +86,23 @@ async function main(options) {
     return;
   }
 
-  // generate reader template
+  // 4. generate reader template
   const [reader, container, transcript, background, videoContainer] = createReader();
   transcript.innerHTML = transcriptData.toHTML();
 
   const inserted = await insertVideoIntoReader(options, video, videoContainer);
+  
+  // sync video times
+  // TODO: Because ads can ruin this, we may want to have as a little button at the top of the reader "Skip to [currentTimeFromA]" whenever the inserted video is at a time between 0 & 5 seconds.
+  insertedPlayer = inserted?.container?.contentWindow ?? inserted?.video
+  sourcePlayer = sourceWindow ?? video
+  syncVideoTimes(sourcePlayer, insertedPlayer)
 
   // booleans for readability
   const addable = (!transcriptData.unhighlightable && options.transcriptSource == transcriptSources.TRACK && transcriptData.track != null); // note that addable is false when the source frame is sending additions.
   const scrubbable = (options.videoSource !== videoSources.MOVE_FROM_PAGE);
 
-  // scrubbing to enable addition:
+  // 5. scrubbing to enable addition:
   if (scrubbable && addable) {
     scrubEntireVideo(video, 5).then(() => {
       scrubEntireVideo(video, 3).then(() => {
@@ -99,7 +112,7 @@ async function main(options) {
     });
   }
 
-  // addition:
+  // 6-a. addition:
   if (addable) {
     transcriptData.track.addEventListener('cuechange', () => {
       Array.from(transcriptData.track.cues).forEach((cue) => {
@@ -118,7 +131,7 @@ async function main(options) {
     });
   }
 
-  // addition via cross-origin frame.
+  // 6-b. addition via cross-origin frame.
   if (transcriptChannelPort) {
       transcriptChannelPort.addEventListener("message", function(e) {
         if (e.data.name == "addedCue") {
@@ -137,7 +150,7 @@ async function main(options) {
       })
     }
 
-  // highlihting.
+  // 7. highlihting.
   if (!transcriptData.unhighlightable && options.transcriptSource !== transcriptSources.PLAIN_TEXT) {
     
     inserted.video?.addEventListener('cuechange', () => {
@@ -160,11 +173,12 @@ async function main(options) {
     
   }
 
-  // hiding page while reader is displayed:
+  // 8. hiding page while reader is displayed:
   html.classList.add("tr-enabled")
   
-  // teardown:
+  // 9. teardown:
   container.onclick = function (e) {
+    syncVideoTimes(insertedPlayer, sourcePlayer)
     if (e.target == e.currentTarget) {
       currentlyRunning = false;
       teardown(options, inserted, reader)
@@ -172,7 +186,7 @@ async function main(options) {
   };
   
   document.onkeypress = function (e) {
-    console.log(e.key)
+    syncVideoTimes(insertedPlayer, sourcePlayer)
     if (e.key === "Escape") {
       currentlyRunning = false;
       teardown(options, inserted, reader)
