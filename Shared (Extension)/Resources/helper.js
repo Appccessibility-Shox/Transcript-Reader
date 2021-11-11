@@ -459,8 +459,48 @@ Object.defineProperty(TranscriptData.prototype, 'trackIsLazyLoaded', {
 // this fetch("dist/mediaelement.vtt").then(result => result.text()).then(vtt => convertVttToJson(vtt)).then(json => console.log(json))
 // worked on http://www.mediaelementjs.com
 
+async function syncVideoTimes(videoOrWindowA, videoOrWindowB) {
+  console.log(videoOrWindowA, videoOrWindowB, "parameters")
+  // this function will take the time from A and set B's time to match it.
+  var currentTimeFromA;
+  if (videoOrWindowA.window) {
+    windowA = videoOrWindowA
+    try {
+      currentTimeFromA = await requestVideoTimeFromFrame(windowA)
+    } catch(e) {
+      alert(e)
+    }
+  } else {
+    videoA = videoOrWindowA
+    currentTimeFromA = videoA.currentTime;
+  }
+  
+  if (videoOrWindowB.window) {
+    windowB = videoOrWindowB;
+    windowB.postMessage({name: "Set Time", time: currentTimeFromA}, "*")
+  } else {
+    videoB = videoOrWindowB
+    videoB.currentTime = currentTimeFromA;
+  }
+  
+}
+
+function requestVideoTimeFromFrame(windowReceivingRequest) {
+  return new Promise((resolve, reject) => {
+    window.onmessage = ({data}) => {
+      if (data.name !== "current time from frame");
+      if (data.error) {
+        reject(data.error);
+      } else {
+        resolve(data.result);
+      }
+      setTimeout(() => reject("Promise timed out after .5 seconds while attempting to glean a frame's current time."), 500)
+    };
+    windowReceivingRequest.postMessage("What's the current time of your video?", "*");
+  })
+}
+
 function getTranscript(options, video, port) {
-  console.log("transcribing2.")
   const transcript = new Promise( async (resolve, reject) => {
   
     runningInSubFrame = window.self !== window.top;

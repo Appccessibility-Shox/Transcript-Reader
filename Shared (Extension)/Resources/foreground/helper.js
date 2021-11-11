@@ -95,7 +95,7 @@ function insertVideoIntoReader(options, video, videoContainer) {
             const video = embeddedFrame.contentDocument.querySelector('video');
             inserted = {
               video,
-              container,
+              container: embeddedFrame,
               type: 'same-origin',
             };
           }
@@ -104,7 +104,7 @@ function insertVideoIntoReader(options, video, videoContainer) {
             embeddedFrame.contentWindow.postMessage('embeddedByTR', '*');
 
             inserted = {
-              conteiner: embeddedFrame,
+              container: embeddedFrame,
               type: 'cross-origin',
             };
           }
@@ -314,4 +314,20 @@ function teardown(options, inserted, reader) {
   }
   
   setTimeout(() => { reader.remove(); }, 400); // 400 refers to the length (in ms) of the 'disappearing' css animation.
+}
+
+function getSourceWindow() {
+  return new Promise((resolve, reject) => {
+    window.addEventListener("message", function(e) {
+      if (e.data == "I'm the source frame activated by bg page.") {
+        resolve(e.source)
+      }
+      setTimeout(() => reject("Promise timed out after 2 seconds while attempting to glean which frame was made the source frame by the background script due to a context menu."), 2000)
+    })
+    
+    document.querySelectorAll("iframe").forEach((frame) => {
+      frame.contentWindow.postMessage("Did bg script make you a source frame?", "*")
+    })
+    
+  })
 }
