@@ -23,7 +23,9 @@ browser.contextMenus.onClicked.addListener(function(clickData) {
       browser.tabs.sendMessage(tabs[0].id, {action: "contextMenuItemClicked", "srcUrl": clickData.srcUrl, "frameUrl": clickData.frameUrl});
     });
     
-    injectSourceJSIntoFrameWithId(clickData.frameId)
+    if (clickData.frameId) {
+      injectSourceJSIntoFrameWithId(clickData.frameId)
+    }
     
   }
 })
