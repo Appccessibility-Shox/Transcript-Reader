@@ -46,10 +46,10 @@ class Reader extends HTMLElement {
     this.decidePaperStatus = function() {
       const windowWidth = window.innerWidth;
       const articleWidth = article.getBoundingClientRect().width;
-      if (articleWidth + 140 < windowWidth) {
-        background.classList.add("paper")
-      } else {
+      if (articleWidth + 140 > windowWidth) {
         background.classList.remove("paper")
+      } else {
+        background.classList.add("paper")
       }
     }
     
@@ -453,41 +453,100 @@ Object.defineProperty(TranscriptData.prototype, 'trackIsLazyLoaded', {
 // this fetch("dist/mediaelement.vtt").then(result => result.text()).then(vtt => convertVttToJson(vtt)).then(json => console.log(json))
 // worked on http://www.mediaelementjs.com
 
-async function syncVideoTimes(videoOrWindowA, videoOrWindowB) {
+async function setVideoPlaybackProperties(videoOrWindow, properties) {
+  if (videoOrWindow.window) {
+    _window = videoOrWindow;
+    console.log(properties)
+    _window.postMessage({name: "Set Playback Properties", properties: properties}, "*")
+  } else {
+    video = videoOrWindow
+    video.playbackRate = properties.rate;
+    video.muted = properties.muted;
+    video.paused = properties.paused;
+    video.currentTime = properties.time;
+  }
+}
+
+function getVideoPlaybackProperties(videoOrWindow) {
+  console.log(videoOrWindow)
+  
+  props = new Promise( async (resolve, reject) => {
+    if (!videoOrWindow) {
+      console.log("Found null while attempting to get playback properties.")
+    }
+    
+    var properties = {}
+    if (videoOrWindow.window) {
+      _window = videoOrWindow
+      try {
+        properties = await requestPlaybackPropertiesFromFrame(_window);
+        resolve(properties);
+      } catch(e) {
+        alert(e)
+      }
+    } else {
+      video = videoOrWindow
+      properties.rate = video.playbackRate;
+      properties.muted = video.muted;
+      properties.paused = video.paused;
+      properties.time = video.currentTime;
+      console.log(properties)
+      resolve(properties)
+    }
+  })
+  
+  return props
+}
+
+async function syncVideoPlaybackProperties(videoOrWindowA, videoOrWindowB) {
   
   if (!videoOrWindowA || !videoOrWindowB) {
-    console.log("Found null while attempting to sync video times.")
+    console.log("Found null while attempting to sync video playback properties.")
   }
   
   console.log(videoOrWindowA, videoOrWindowB, "parameters")
   // this function will take the time from A and set B's time to match it.
+  var playbackRateFromA;
+  var mutedFromA;
+  var pausedFromA;
   var currentTimeFromA;
+  
   if (videoOrWindowA.window) {
     windowA = videoOrWindowA
     try {
-      currentTimeFromA = await requestVideoTimeFromFrame(windowA)
+      properties = await requestPlaybackPropertiesFromFrame(windowA)
+      playbackRateFromA = properties.rate
+      mutedFromA = properties.muted
+      pausedFromA = properties.paused
+      currentTimeFromA = properties.time
     } catch(e) {
       alert(e)
     }
   } else {
     videoA = videoOrWindowA
+    playbackRateFromA = videoA.playbackRate;
+    mutedFromA = videoA.muted;
+    pausedFromA = videoA.paused;
     currentTimeFromA = videoA.currentTime;
   }
   
   if (videoOrWindowB.window) {
     windowB = videoOrWindowB;
-    windowB.postMessage({name: "Set Time", time: currentTimeFromA}, "*")
+    windowB.postMessage({name: "Set Playback Properties", properties: properties}, "*")
   } else {
     videoB = videoOrWindowB
-    videoB.currentTime = currentTimeFromA;
+    videoB.playbackRate = playbackRateFromA ?? 1;
+    videoB.muted = mutedFromA ?? false;
+    videoB.paused = pausedFromA ?? true;
+    videoB.currentTime = currentTimeFromA ?? 2;
   }
   
 }
 
-function requestVideoTimeFromFrame(windowReceivingRequest) {
+function requestPlaybackPropertiesFromFrame(windowReceivingRequest) {
   return new Promise((resolve, reject) => {
     window.onmessage = ({data}) => {
-      if (data.name !== "current time from frame");
+      if (data.name !== "playback properties from frame");
       if (data.error) {
         reject(data.error);
       } else {
@@ -495,7 +554,7 @@ function requestVideoTimeFromFrame(windowReceivingRequest) {
       }
       setTimeout(() => reject("Promise timed out after .5 seconds while attempting to glean a frame's current time."), 500)
     };
-    windowReceivingRequest.postMessage("What's the current time of your video?", "*");
+    windowReceivingRequest.postMessage("What are the playback properties of your video?", "*");
   })
 }
 
@@ -555,6 +614,9 @@ function getTranscript(options, video, port) {
           switch (scrubPreference) {
             case trackScrubOptions.REAL_TIME:
               resolve(transcriptData);
+              scrubEntireVideo(video, 5).then(()=> {
+                video.playbackRate = 1;
+              })
               break;
             case trackScrubOptions.OUTSET:
               scrubEntireVideo(video, 5).then(() => {
