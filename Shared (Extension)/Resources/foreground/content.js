@@ -53,6 +53,10 @@ async function main(options) {
     }
   }
   
+  // 1-2. log video playback properties so that when you create an inserted video, you can set its playback properties to match the original.
+  sourcePlayer = sourceWindow ?? video
+  originalPlaybackProperties = await getVideoPlaybackProperties(sourcePlayer);
+  
   // 2. run site-specific preparations.
   if (!options.hasOwnProperty('prepare') || frameUrl) {
     options.prepare = function () {
@@ -96,22 +100,11 @@ async function main(options) {
   // sync video times
   // TODO: Because ads can ruin this, we may want to have as a little button at the top of the reader "Skip to [currentTimeFromA]" whenever the inserted video is at a time between 0 & 5 seconds.
   insertedPlayer = inserted?.container?.contentWindow ?? inserted?.video
-  sourcePlayer = sourceWindow ?? video
-  syncVideoTimes(sourcePlayer, insertedPlayer)
+  setVideoPlaybackProperties(insertedPlayer, originalPlaybackProperties)
 
   // booleans for readability
   const addable = (!transcriptData.unhighlightable && options.transcriptSource == transcriptSources.TRACK && transcriptData.track != null); // note that addable is false when the source frame is sending additions.
   const scrubbable = (options.videoSource !== videoSources.MOVE_FROM_PAGE);
-
-  // 5. scrubbing to enable addition:
-  if (scrubbable && addable) {
-    scrubEntireVideo(video, 5).then(() => {
-      scrubEntireVideo(video, 3).then(() => {
-        video.pause();
-        video.playbackRate = 1;
-      });
-    });
-  }
 
   // 6-a. addition:
   if (addable) {
@@ -179,16 +172,16 @@ async function main(options) {
   
   // 9. teardown:
   container.onclick = function (e) {
-    syncVideoTimes(insertedPlayer, sourcePlayer)
     if (e.target == e.currentTarget) {
+      syncVideoPlaybackProperties(insertedPlayer, sourcePlayer)
       currentlyRunning = false;
       teardown(options, inserted, reader)
     }
   };
   
   document.onkeypress = function (e) {
-    syncVideoTimes(insertedPlayer, sourcePlayer)
     if (e.key === "Escape") {
+      syncVideoPlaybackProperties(insertedPlayer, sourcePlayer)
       currentlyRunning = false;
       teardown(options, inserted, reader)
     }

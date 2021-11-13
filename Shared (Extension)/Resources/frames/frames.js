@@ -56,21 +56,30 @@ window.addEventListener("message", (event) => {
     browser.runtime.sendMessage("inject source.js into me")
   }
   
-  if (event.data === "What's the current time of your video?") {
+  if (event.data === "What are the playback properties of your video?") {
     video = document.querySelector("video")
     if (!video) {
-      window.top.postMessage({name: "current time from frame", error: "No video exists in this frame"}, "*")
+      window.top.postMessage({name: "playback properties from frame", error: "No video exists in this frame"}, "*")
     }
     else {
-      currentTime = video.currentTime
-      window.top.postMessage({name: "current time from frame", result: currentTime}, "*")
+      playbackProperties = {
+        "time": video.currentTime,
+        "paused": video.paused,
+        "muted": video.muted,
+        "rate": video.playbackRate
+      }
+      window.top.postMessage({name: "playback properties from frame", result: playbackProperties}, "*")
     }
   }
   
-  if (event.data?.name === "Set Time") {
-    timeToSetTo = event.data.time;
+  if (event.data?.name === "Set Playback Properties") {
+    properties = event.data?.properties
+    
     video = document.querySelector("video")
-    video.currentTime = timeToSetTo;
+    video.currentTime = properties.time ?? 2;
+    video.playbackRate = properties.rate ?? 1;
+    video.paused = properties.paused ?? true;
+    video.muted = properties.muted ?? false;
   }
   
 }, false);
