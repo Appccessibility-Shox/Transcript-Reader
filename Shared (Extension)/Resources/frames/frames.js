@@ -37,6 +37,14 @@ window.addEventListener("message", (event) => {
   
   if (event.data == "Do You Contain A Video?") {
     port = event.ports[0]
+    /*
+    TODO: For whatever reason, sometime the event.ports[0] is null. It happens on reddit but only when the origin is redditmedia not reddit, so maybe that has something to do with it. The code below just lets you kind of observe this but not sure how I'd go about fixing it.
+    if (!port) {
+      console.log("no port", window.location.href)
+      return
+    } else {
+      console.log("port", window.location.href)
+    } */
     if (!!document.querySelector("video")) {
       port.postMessage({containmentStatus: true, frameUrl: window.location.href})
     } else {

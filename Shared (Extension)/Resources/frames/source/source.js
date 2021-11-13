@@ -2,6 +2,7 @@ var transcriptChannel = new MessageChannel();
 
 // transfer ownership of port2 to the main window.
 mainWindow = window.top;
+mainWindow.postMessage("I'm the source frame activated by bg page.", "*")
 mainWindow.postMessage('Transcript Channel Port', '*', [transcriptChannel.port2]);
 
 // listen for messages on this channel that the main window sends here.
@@ -87,5 +88,7 @@ function requestConfirmationResultFromMainWindow() {
 window.addEventListener("message", (e) => {
   if (e.data === "Did bg script make you a source frame?") {
     mainWindow.postMessage("I'm the source frame activated by bg page.", "*")
+  } else if (e.data === "Send transcript channel port") {
+    mainWindow.postMessage('Transcript Channel Port', '*', [transcriptChannel.port2]);
   }
 })

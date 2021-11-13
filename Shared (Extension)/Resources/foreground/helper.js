@@ -146,13 +146,18 @@ function presentConfirmDialogs(func1, func2, func3) {
   }
 }
 
-function getPortConnection(msg) {
+function getPortConnection(msg, promptingCallback) {
   return new Promise((resolve, reject) => {
     window.addEventListener("message", function(e) {
       if (e.data == msg) {
         resolve(e.ports[0])
       }
     })
+    
+    if (promptingCallback) {
+      promptingCallback();
+    }
+    
   })
 }
 
@@ -220,7 +225,7 @@ function createEmbeddedFrame(getEmbedLinkFunction) {
 
 function videoContainmentStatusOfIframe(iframe) {
   return new Promise((resolve, reject) => {
-    var channel = new MessageChannel();
+    const channel = new MessageChannel();
     channel.port1.onmessage = ({data}) => {
       channel.port1.close();
       resolve(data)
@@ -312,6 +317,8 @@ function teardown(options, inserted, reader) {
     case videoSources.EMBED_VIDEO:
     break;
   }
+  
+  frameUrl = srcUrl = crossOrigin = transcriptChannelPort = confirmationChannelPort = lastUsedOptions = sourceWindow = null;
   
   setTimeout(() => { reader.remove(); }, 400); // 400 refers to the length (in ms) of the 'disappearing' css animation.
 }

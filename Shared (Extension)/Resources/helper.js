@@ -80,12 +80,6 @@ function getPreferredTrack(listOfTracks) {
     }
 }
 
-// This function takes two video elements and sets the second video's current time to be equal to the first's.
-function syncVideoTimes(video1, video2) {
-    const ct = video1.currentTime;
-    video2.currentTime = ct;
-}
-
 // Courtesy of Amit Diwan on Tutorials Point (very, very slightly adapted).
 function getCommonSubstringLength(str1, str2) {
     const s1 = [...str1];
@@ -460,6 +454,11 @@ Object.defineProperty(TranscriptData.prototype, 'trackIsLazyLoaded', {
 // worked on http://www.mediaelementjs.com
 
 async function syncVideoTimes(videoOrWindowA, videoOrWindowB) {
+  
+  if (!videoOrWindowA || !videoOrWindowB) {
+    console.log("Found null while attempting to sync video times.")
+  }
+  
   console.log(videoOrWindowA, videoOrWindowB, "parameters")
   // this function will take the time from A and set B's time to match it.
   var currentTimeFromA;
@@ -530,6 +529,11 @@ function getTranscript(options, video, port) {
     
     switch (options.transcriptSource) {
       case transcriptSources.TRACK: {
+        if (!track) {
+          reject("track not found")
+          return;
+        }
+        
         if (!track.cues) {
           continuallySetTrackToShowingUntilCuesExist(video)
             .catch((err) => reject(err));
