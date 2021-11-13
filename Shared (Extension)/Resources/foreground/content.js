@@ -1,11 +1,4 @@
-var frameUrl;
-var srcUrl;
-var crossOrigin;
-var transcriptChannelPort;
-var confirmationChannelPort;
-var lastUsedOptions;
-var sourceWindow;
-
+var frameUrl, srcUrl, crossOrigin, transcriptChannelPort, confirmationChannelPort, lastUsedOptions, sourceWindow;
 var currentlyRunning = false;
 
 browser.runtime.onMessage.addListener((msg) => {
@@ -15,8 +8,6 @@ browser.runtime.onMessage.addListener((msg) => {
   frameUrl = msg.frameUrl === undefined ? null : msg.frameUrl
   srcUrl = msg.srcUrl === undefined ? null : msg.srcUrl
   crossOrigin = (frameUrl && new URL(frameUrl).hostname !== window.location.hostname) ? true : false
-  
-  console.log(frameUrl, srcUrl, crossOrigin)
   
   if (!currentlyRunning && (triggeredByContextMenu || triggeredByToolbarItem)) {
     currentlyRunning = true;
@@ -39,7 +30,7 @@ async function main(options) {
   // There's a little bit of complexity to this step due to one fact: when the user selects an iframe via the context menu, source.js is injected into it immediately by the background scrip and the content script thus has no reference to it. In that case, we use getSourceWindow() to just ask all frames to tell us if they have source.js injected. Only the one with source.js injected will know to respond in the affirmative. In the case where the background script doesn't inject source.js, we know that we get to decide which player (iframes + videos) should become the source frame. That's what is happening inside the if (!frameUrl) block.
   var video = null;
   if (!frameUrl) {
-    // ^ if there's a frameUrl, that means the background script would have already injected source.js into the source video, so there's no need to do anything else.
+    // ^ if there's a frameUrl, that means the background script would have already injected source.js into the source video.
     data = await getRelevantVideo(srcUrl);
     player = data.element;
     if (player.tagName === "IFRAME") {
@@ -55,7 +46,11 @@ async function main(options) {
       video = data.element
     }
   } else {
-    sourceWindow = await getSourceWindow()
+    try {
+      sourceWindow = await getSourceWindow()
+    } catch(e) {
+      console.log(`Error getting frame containing source.js ${e}`)
+    }
   }
   
   // 2. run site-specific preparations.
@@ -70,7 +65,13 @@ async function main(options) {
   // 3. get the transcript.
   try {
     if (frameUrl) {
-      transcriptChannelPort = await getPortConnection("Transcript Channel Port");
+      transcriptChannelPort = await getPortConnection("Transcript Channel Port", function() {
+        if (sourceWindow) {
+          sourceWindow.postMessage("Send transcript channel port", "*")
+        } else {
+          Array.from(window.frames).forEach((frame) => {frame.postMessage("Send transcript channel port", "*")})
+        }
+      });
       getPortConnection("Confirmation Channel Port").then((port) => {
         presentConfirmDialogs(() => {port.postMessage({result: trackScrubOptions.OUTSET})}, () => {port.postMessage({result: trackScrubOptions.REAL_TIME})}, () => {port.postMessage({error: "Aborted by user."})})
       });
@@ -193,3 +194,9 @@ async function main(options) {
     }
   }
 }
+
+window.addEventListener("message", (event) => {
+  if (event.data === "I'm the source frame activated by bg page") {
+    sourceWindow = event.source
+  }
+})

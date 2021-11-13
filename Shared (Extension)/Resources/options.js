@@ -92,7 +92,6 @@ const youTubeOptionsAlternative3 = {
   "videoSource": videoSources.EMBED_VIDEO,
   "transcriptSource": transcriptSources.TRANSCRIPT,
   "openTranscript": function() {
-    alert("yto3")
     document.querySelector("#info div#menu button[aria-label='More actions']").click();
     
     const openTranscript = new Promise((resolve, reject) => {
@@ -199,7 +198,11 @@ youTubeOptionsAlternative2 = {
     .then(htmlText => {
       var regExp = new RegExp(/playerCaptionsTracklistRenderer.*?(youtube.com\/api\/timedtext.*?)"/);
       escaped = regExp.exec(htmlText)[1];
-      return unescaped = JSON.parse(`"https://${escaped}&format=json3"`);
+      unescaped = JSON.parse(`"https://${escaped}&format=json3"`);
+      unescaped = new URL(unescaped)
+      unescaped.searchParams.set("lang", "en")
+      unescaped = unescaped.toString()
+      return unescaped
     }).then(unescaped => fetch(unescaped))
     .then(a => a.json())
     .then(json => {
@@ -260,6 +263,9 @@ const youTubeOptionsAlternative1 = {
       return Promise.reject("There must have been no video on the original page loaded.")
     }
     unescaped = JSON.parse(`"https://${escaped}&format=json3"`);
+    unescaped = new URL(unescaped)
+    unescaped.searchParams.set("lang", "en")
+    unescaped = unescaped.toString()
     
     fetched = fetch(unescaped)
     .then(a => a.json())
