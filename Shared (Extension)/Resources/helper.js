@@ -505,7 +505,13 @@ function getVideoPlaybackProperties(videoOrWindow) {
 async function syncVideoPlaybackProperties(videoOrWindowA, videoOrWindowB) {
   
   if (!videoOrWindowA || !videoOrWindowB) {
-    console.log("Found null while attempting to sync video playback properties.")
+    console.log("Found null while attempting to sync video playback properties.");
+    return
+  }
+  
+  if (videoOrWindowA == videoOrWindowB) {
+    console.log("Attempted to sync video times with itself")
+    return
   }
   
   console.log(videoOrWindowA, videoOrWindowB, "parameters")
