@@ -137,6 +137,7 @@
 }
 
 #tr-video-container video {
+  background: var(--articleBackgroundColor);
   width: 100%;
   max-height: 350px;
 }

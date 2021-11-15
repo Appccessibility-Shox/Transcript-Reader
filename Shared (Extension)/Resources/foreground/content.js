@@ -86,6 +86,7 @@ async function main(options) {
       lastUsedOptions = options.alternative;
       main(options.alternative);
     } else {
+      currentlyRunning = false
       alert("Error gathering transcript: " + error)
     }
     return;
