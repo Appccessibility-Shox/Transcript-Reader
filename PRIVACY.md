@@ -1,0 +1,8 @@
+# Transcript Reader Privacy Policy
+Transcript Reader does not collect any personal information whatsoever. Users may be prompted to send anonymized crash logs, which they can simply elect not to do.
+
+## Why does Safari caution me that Transcript Reader has permissions to read sensitive information from webpages including passwords, phone numbers, and credit cards on all sites and has access to my browsing history?
+Although Transcript Reader does not attempt to collect any of this sensitive data, it must run Javascript on the webpages you visit in order to function. Hence, Apple cautions its users that a malicious extension with these permissions could read sensitive information from users. Apple requires, however, that developers submit government-issued photo ID. For users' peace of mind, Transcript Reader's source has been made publicly viewable in this repository.
+
+## I heard "disabled" people get Transcript Reader for free. Do I have to share information about my disability to claim this promo code?
+Absolutely not. If you are interested in downlaoding Transcript Reader for accessibility reasons (such as a visual impairment, a hearing impairment, ADHD, or any other disability) then Transcript Reader is 100% free. To claim your 100% discount, email shockerellaapps@gmail.com for a promo code. **There is no need for you to disclose *any* of your personal health information in this email** (for example, there's no need to share what your specific accessibility concer is). For example, you could write "I am writing to recieve a promo code for those with accessibility concerns" and that would totally suffice.
