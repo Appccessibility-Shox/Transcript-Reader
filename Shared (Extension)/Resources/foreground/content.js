@@ -1,4 +1,4 @@
-var frameUrl, srcUrl, crossOrigin, transcriptChannelPort, confirmationChannelPort, lastUsedOptions, sourceWindow;
+var frameUrl, srcUrl, crossOrigin, transcriptChannelPort, confirmationChannelPort, lastUsedOptions, sourceWindow, sourcePlayer, inserted;
 var currentlyRunning = false;
 
 browser.runtime.onMessage.addListener((msg) => {
@@ -20,7 +20,8 @@ browser.runtime.onMessage.addListener((msg) => {
     currentlyRunning = false;
     insertedVideo = document.querySelector("transcript-reader").shadowRoot.querySelector("video")
     reader = document.querySelector("transcript-reader")
-    teardown(lastUsedOptions, insertedVideo, reader)
+    syncVideoPlaybackProperties(insertedVideo, sourcePlayer)
+    teardown(lastUsedOptions, inserted, reader)
   }
 });
 
@@ -96,7 +97,7 @@ async function main(options) {
   const [reader, container, transcript, background, videoContainer] = createReader();
   transcript.innerHTML = transcriptData.toHTML();
 
-  const inserted = await insertVideoIntoReader(options, video, videoContainer);
+  inserted = await insertVideoIntoReader(options, video, videoContainer);
   
   // sync video times
   // TODO: Because ads can ruin this, we may want to have as a little button at the top of the reader "Skip to [currentTimeFromA]" whenever the inserted video is at a time between 0 & 5 seconds.
