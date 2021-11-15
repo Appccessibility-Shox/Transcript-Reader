@@ -318,7 +318,7 @@ function teardown(options, inserted, reader) {
     break;
   }
   
-  frameUrl = srcUrl = crossOrigin = transcriptChannelPort = confirmationChannelPort = lastUsedOptions = sourceWindow = null;
+  frameUrl = srcUrl = crossOrigin = transcriptChannelPort = crossOrigin = confirmationChannelPort = lastUsedOptions = sourceWindow = inserted = null;
   
   setTimeout(() => { reader.remove(); }, 400); // 400 refers to the length (in ms) of the 'disappearing' css animation.
 }
