@@ -2,7 +2,7 @@
   <span align="center">
     Transcript Reader for Safari (1.0) <img src="Resources/icon.png" alt="logo" width="50" height="50">
   </span>
-  <a href="https://apps.apple.com/us/app/keys-for-safari/id1494642810?mt=12">
+  <a href="https://apps.apple.com/us/app/transcript-reader/id1595490573">
     <img align="right" style="position: absolute" src="Resources/AppStoreBadge.svg">
   </a>
 </h1>
