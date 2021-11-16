@@ -5,6 +5,8 @@
 </h1>
 Reader view is a standard feature in Safari that allows users to read articles more comfortably. Transcript Reader extends this concept to video subtitles. Transcript Reader invites video watchers to select, search, copy, Quick note, and read ahead.
 
+![A banner image displaying the words "Transcript Reader" surrounded by devices with Transcript Reader open](Resources/GitHub%20Banner.png)
+
 ## Demos
 ![Demo of Transcript Reader working on YouTube.com](Resources/YouTubeDemo.gif)
 
