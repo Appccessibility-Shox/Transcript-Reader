@@ -19,7 +19,7 @@ Want to see other demos? [Click here!](https://github.com/Appccessibility-Shox/T
 - Elegant design
 - Context (a.k.a. right click) menu & toolbar button 
 - Light mode & dark mode compatible
-- Live highlighting of the active cue and of previously watched cues.
+- Live highlighting of the active cue and of previously watched cues
 
 ## Who is Transcript Reader for?
 1. Individuals with hearing impairments who want to read subtitles more comfortably.
