@@ -66,4 +66,4 @@ It's difficult to answer this for a couple reasons:
 3. It's impossible to generate a "random sample" of videos with captions from the web.
 
 Still, I Googled search terms like "video with captions" and "videojs captions example" and found 6 sites with custom players and subtitles. Of these, 50% had a transcript that was available instantly and 50% had a transcript that had to be scrubbed.
-Another way of addressing this question is to assume that most of the web is using one of the popular open-source video player libraries, such as [Video.js](https://videojs.com/advanced/?video=elephantsdream) or [Plyr](https://plyr.io). I found that Transcript Reader worked on both the demos hyperlinked.
+Another way of addressing this question is to assume that most of the web is using one of the popular open-source video player libraries, such as [VideoJS](https://videojs.com/advanced/?video=elephantsdream) or [Plyr](https://plyr.io). I found that Transcript Reader worked on both the demos hyperlinked.
